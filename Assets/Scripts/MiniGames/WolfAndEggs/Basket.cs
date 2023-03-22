@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace MiniGames.WolfAndEggs
@@ -10,7 +11,7 @@ namespace MiniGames.WolfAndEggs
 
         public void BasketMove(Vector3 vector3)
         {
-            gameObject.transform.position = vector3;
+            transform.DOMove(vector3, 0.2f);
         }
     }
 }

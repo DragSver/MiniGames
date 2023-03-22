@@ -1,5 +1,8 @@
-﻿namespace MiniGames.WolfAndEggs
+﻿using System;
+
+namespace MiniGames.WolfAndEggs
 {
+    [Serializable]
     public enum BasketStatus
     {
         LeftTop,

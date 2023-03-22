@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DG.Tweening;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MiniGames.WolfAndEggs.Services
@@ -11,31 +9,43 @@ namespace MiniGames.WolfAndEggs.Services
         private GameController _gameController;
         
         [HideInInspector] public List<Egg> Eggs;
-
+        [SerializeField] private float Speed;
+        
         public void Initialize(GameController gameController)
         {
             _gameController = gameController;
             
             Eggs = new List<Egg>();
+            Speed = 0.5f;
         }
         
-        public void Move(Egg egg)
+        public void Update()
         {
-            Vector3 vector3;
-
-            var sequence = DOTween.Sequence();
-
-            foreach (var trajectory in egg.SpawnEggs.Trajectories)
+            for (var index = 0; index < Eggs.Count; index++)
             {
-                sequence.AppendCallback(() =>
-                    {
-                        vector3 = new Vector3(egg.transform.position.x+trajectory.Vector3.x, 
-                            egg.transform.position.y+trajectory.Vector3.y, 0);
-                        
-                        egg.transform.DOMove(vector3, trajectory.Speed).SetEase(Ease.Linear);
-                    })
-                    .AppendInterval(trajectory.Speed);
+                var egg = Eggs[index];
+                switch (egg.Status)
+                {
+                    case EggStatus.RollingDown:
+                        egg.RollingDown(GetSpeed() * Time.deltaTime);
+                        break;
+                    case EggStatus.CanCatch:
+                        egg.CanCatch(GetSpeed() * Time.deltaTime);
+                        break;
+                    case EggStatus.Fall:
+                        egg.Fall(GetSpeed() * Time.deltaTime);
+                        break;
+                    case EggStatus.Destroy:
+                        Eggs.RemoveAt(index--);
+                        Destroy(egg.gameObject);
+                        break;
+                }
             }
+        }
+
+        private float GetSpeed()
+        {
+            return _gameController.Points.Point / 500 + Speed;
         }
     }
 }

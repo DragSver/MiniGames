@@ -272,6 +272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameController: {fileID: 318507008}
   _catchZone: {fileID: 1309000841}
+  _basketStatus: 1
 --- !u!1 &185604581
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Eggs: []
+  Speed: 0
 --- !u!1 &410270587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,6 +1669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RightBottomDescent
       objectReference: {fileID: 0}
+    - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
+      propertyPath: BasketStatus
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8345732596469799717, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1752,28 +1758,8 @@ PrefabInstance:
       value: LeftTopDescent
       objectReference: {fileID: 0}
     - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: Trajectories.Array.data[0].x
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: Trajectories.Array.data[0].Vector3.x
       value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: Trajectories.Array.data[1].Vector3.y
-      value: -0.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826945422144505773, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: _coordinats.Array.data[0].x
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826945422144505773, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: _coordinats.Array.data[0].y
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826945422144505773, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: _coordinats.Array.data[1].y
-      value: -0.43
       objectReference: {fileID: 0}
     - target: {fileID: 8345732596469799717, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: m_RootOrder
@@ -2132,6 +2118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameController: {fileID: 318507008}
   _catchZone: {fileID: 1031463081}
+  _basketStatus: 2
 --- !u!1 &1100677646
 GameObject:
   m_ObjectHideFlags: 0
@@ -2393,24 +2380,12 @@ PrefabInstance:
       value: LeftBottomDescent
       objectReference: {fileID: 0}
     - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: Trajectories.Array.data[0].x
-      value: 1.8
+      propertyPath: BasketStatus
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: Trajectories.Array.data[0].Vector3.x
       value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: Trajectories.Array.data[1].Vector3.y
-      value: -0.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826945422144505773, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: _coordinats.Array.data[0].x
-      value: 1.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6826945422144505773, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
-      propertyPath: _coordinats.Array.data[0].y
-      value: -0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8345732596469799717, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: m_RootOrder
@@ -2623,6 +2598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameController: {fileID: 318507008}
   _catchZone: {fileID: 940600974}
+  _basketStatus: 0
 --- !u!114 &1473822019 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
@@ -2892,6 +2868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameController: {fileID: 318507008}
   _catchZone: {fileID: 789714109}
+  _basketStatus: 3
 --- !u!1 &1823745861
 GameObject:
   m_ObjectHideFlags: 0
@@ -3003,6 +2980,10 @@ PrefabInstance:
     - target: {fileID: 2524215878163295120, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: m_Name
       value: RightTopDescent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4038202944374237457, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
+      propertyPath: BasketStatus
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8345732596469799717, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: m_RootOrder

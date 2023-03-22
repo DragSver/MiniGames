@@ -1,6 +1,5 @@
 ﻿using MiniGames.WolfAndEggs.Services;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace MiniGames.WolfAndEggs
 {
@@ -8,9 +7,11 @@ namespace MiniGames.WolfAndEggs
     {
         [SerializeField] private GameController _gameController;
         [SerializeField] private CatchZone _catchZone;
+        [SerializeField] private BasketStatus _basketStatus;
 
         public void BasketMove()
         {
+            _gameController.Basket.Status = _basketStatus;
             _gameController.Basket.BasketMove(_catchZone.transform.position);
         }
         

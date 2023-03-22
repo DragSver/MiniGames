@@ -15,7 +15,7 @@ namespace MiniGames.WolfAndEggs.Services
         {
             _gameController = gameController;
             
-            _spawnInterval = 5;
+            _spawnInterval = 3;
             _random = new System.Random();
             _eggPrefab = Resources.Load<GameObject>("Prefabs/Egg");
         }
@@ -36,7 +36,7 @@ namespace MiniGames.WolfAndEggs.Services
 
         private float GetSpawnInterval()
         {
-            var point = _gameController.Points.Point/100;
+            var point = _gameController.Points.Point/10;
             return _spawnInterval - (point > 0.1f ? point : 0.1f);
         }
     }
