@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using MiniGames.WolfAndEggs.Services;
+﻿using MiniGames.WolfAndEggs.Services;
 using UnityEngine;
 
 namespace MiniGames.WolfAndEggs
@@ -9,7 +8,6 @@ namespace MiniGames.WolfAndEggs
         private GameController _gameController;
 
         [HideInInspector] public EggStatus Status;
-        [HideInInspector] public bool IsCatch;
         private SpawnEggs _spawnEggs;
         private Vector3 _endPosition;
         private byte _numTrajectories;
@@ -23,7 +21,7 @@ namespace MiniGames.WolfAndEggs
             
             _numTrajectories = 0;
             Status = EggStatus.RollingDown;
-            UpdateEndPosition(_spawnEggs.Trajectories[_numTrajectories].Vector3);
+            UpdateEndPosition(_spawnEggs.Vector3[_numTrajectories]);
         }
 
         public void RollingDown(float speed)
@@ -32,13 +30,13 @@ namespace MiniGames.WolfAndEggs
 
             if (transform.position != _endPosition) return;
             
-            if (++_numTrajectories == _spawnEggs.Trajectories.Count)
+            if (++_numTrajectories == _spawnEggs.Vector3.Count)
             {
                 UpdateEndPosition(new Vector3(0, -0.4f, 0));
                 Status = EggStatus.CanCatch;
             }
             else
-                UpdateEndPosition(_spawnEggs.Trajectories[_numTrajectories].Vector3);
+                UpdateEndPosition(_spawnEggs.Vector3[_numTrajectories]);
         }
 
         public void CanCatch(float speed)

@@ -44,11 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dd6c4721f6b485a818983bb6267a816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Trajectories:
-  - Vector3: {x: -1.8, y: -0.8, z: 0}
-    Speed: 0.5
-  - Vector3: {x: 0, y: -0.2, z: 0}
-    Speed: 0.5
+  Vector3:
+  - {x: -1.8, y: -0.8, z: 0}
+  - {x: 0, y: -0.3, z: 0}
+  BasketStatus: 0
 --- !u!1 &2343261766243244096
 GameObject:
   m_ObjectHideFlags: 0

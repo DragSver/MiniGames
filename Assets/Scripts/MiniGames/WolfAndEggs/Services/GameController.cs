@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MiniGames.WolfAndEggs.Services
 {
@@ -6,11 +7,14 @@ namespace MiniGames.WolfAndEggs.Services
     {
         [HideInInspector] public UIController UIController;
         [HideInInspector] public MoveEggsController MoveEggsController;
-        [HideInInspector] public SpawnEggController SpawnEggController;
+        [HideInInspector] public SpawnEggsController SpawnEggsController;
+
+        [HideInInspector] public bool IsPause;
         
         [HideInInspector] public Basket Basket;
         private GameObject _basketPrefab;
         [SerializeField] private CatchZone _startCatchZone;
+        
 
         public Points Points;
         public Lives Lives;
@@ -19,13 +23,15 @@ namespace MiniGames.WolfAndEggs.Services
         {
             UIController = gameObject.GetComponent<UIController>();
             MoveEggsController = gameObject.GetComponent<MoveEggsController>();
-            SpawnEggController = gameObject.GetComponent<SpawnEggController>();
+            SpawnEggsController = gameObject.GetComponent<SpawnEggsController>();
             
             MoveEggsController.Initialize(this);
-            SpawnEggController.Initialize(this);
+            SpawnEggsController.Initialize(this);
             
             Points = new Points(this);
             Lives = new Lives(this);
+
+            IsPause = false;
             
             _basketPrefab = Resources.Load<GameObject>("Prefabs/Basket");
             
@@ -34,9 +40,28 @@ namespace MiniGames.WolfAndEggs.Services
             
         }
 
+        public void SwitchPause()
+        {
+            if (IsPause)
+            {
+                SpawnEggsController.enabled = true;
+                MoveEggsController.enabled = true;
+                foreach (var egg in MoveEggsController.Eggs)
+                    egg.Animator.enabled = true;
+            }
+            else
+            {
+                SpawnEggsController.enabled = false;
+                MoveEggsController.enabled = false;
+                foreach (var egg in MoveEggsController.Eggs)
+                    egg.Animator.enabled = false;
+            }
+            IsPause = !IsPause;
+        }
+        
         public void EndGame()
         {
-            Time.timeScale = 0;
+            SwitchPause();
         }
     }
 }

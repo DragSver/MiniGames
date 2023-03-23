@@ -1,7 +1,7 @@
 ﻿using MiniGames.WolfAndEggs.Services;
 using UnityEngine;
 
-namespace MiniGames.WolfAndEggs
+namespace MiniGames.WolfAndEggs.UI
 {
     public class MoveButton : MonoBehaviour
     {
@@ -11,6 +11,7 @@ namespace MiniGames.WolfAndEggs
 
         public void BasketMove()
         {
+            if (_gameController.IsPause) return;
             _gameController.Basket.Status = _basketStatus;
             _gameController.Basket.BasketMove(_catchZone.transform.position);
         }

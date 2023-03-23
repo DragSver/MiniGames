@@ -2,7 +2,7 @@
 
 namespace MiniGames.WolfAndEggs.Services
 {
-    public class SpawnEggController : MonoBehaviour
+    public class SpawnEggsController : MonoBehaviour
     {
         private System.Random _random;
         private GameController _gameController;
@@ -27,6 +27,7 @@ namespace MiniGames.WolfAndEggs.Services
 
         private void SpawnEgg()
         {
+            if (_gameController.IsPause) return;
             var spawnEgg = SpawnPlaces[_random.Next(0, SpawnPlaces.Length)];
 
             var eggGO = Instantiate(_eggPrefab, spawnEgg.transform.position, Quaternion.identity);
