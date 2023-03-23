@@ -6,14 +6,13 @@ namespace MiniGames.WolfAndEggs.UI
     public class MoveButton : MonoBehaviour
     {
         [SerializeField] private GameController _gameController;
-        [SerializeField] private CatchZone _catchZone;
         [SerializeField] private BasketStatus _basketStatus;
+        [SerializeField] private GameObject _basketPosition;
 
         public void BasketMove()
         {
-            if (_gameController.IsPause) return;
             _gameController.Basket.Status = _basketStatus;
-            _gameController.Basket.BasketMove(_catchZone.transform.position);
+            _gameController.Basket.BasketMove(_basketPosition.transform.position);
         }
         
     }

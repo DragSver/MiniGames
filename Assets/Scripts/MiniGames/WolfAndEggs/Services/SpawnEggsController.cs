@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace MiniGames.WolfAndEggs.Services
 {
     public class SpawnEggsController : MonoBehaviour
     {
-        private System.Random _random;
-        private GameController _gameController;
         private float _spawnInterval;
         private GameObject _eggPrefab;
-        
-        [SerializeField] public SpawnEggs[] SpawnPlaces;
+        private System.Random _random;
+        private GameController _gameController;
+
+        [SerializeField] private List<Spline> _listSplinePoints;
 
         public void Initialize(GameController gameController)
         {
@@ -22,17 +23,19 @@ namespace MiniGames.WolfAndEggs.Services
 
         private void Start()
         {
-            InvokeRepeating("SpawnEgg", 1-_gameController.Points.Point/100, GetSpawnInterval());
+            InvokeRepeating("SpawnEgg", GetSpawnInterval(), GetSpawnInterval());
         }
 
         private void SpawnEgg()
         {
             if (_gameController.IsPause) return;
-            var spawnEgg = SpawnPlaces[_random.Next(0, SpawnPlaces.Length)];
 
-            var eggGO = Instantiate(_eggPrefab, spawnEgg.transform.position, Quaternion.identity);
+            var numberSpawnPlace = _random.Next(0, _listSplinePoints.Count);
+            var spawnPlace = _listSplinePoints[numberSpawnPlace];
+
+            var eggGO = Instantiate(_eggPrefab, spawnPlace.SplinePoints[0].Vector3, Quaternion.identity);
             _gameController.MoveEggsController.Eggs.Add(eggGO.GetComponent<Egg>());
-            _gameController.MoveEggsController.Eggs[^1].Initialize(_gameController, spawnEgg);
+            _gameController.MoveEggsController.Eggs[^1].Initialize(_gameController, spawnPlace.SplinePoints);
         }
 
         private float GetSpawnInterval()

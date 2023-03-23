@@ -25,18 +25,12 @@ namespace MiniGames.WolfAndEggs.Services
                 var egg = Eggs[index];
                 switch (egg.Status)
                 {
-                    case EggStatus.RollingDown:
-                        egg.RollingDown(GetSpeed() * Time.deltaTime);
-                        break;
-                    case EggStatus.CanCatch:
-                        egg.CanCatch(GetSpeed() * Time.deltaTime);
-                        break;
-                    case EggStatus.Fall:
-                        egg.Fall(GetSpeed() * Time.deltaTime);
-                        break;
                     case EggStatus.Destroy:
                         Eggs.RemoveAt(index--);
                         Destroy(egg.gameObject);
+                        break;
+                    default:
+                        egg.Move(GetSpeed() * Time.deltaTime);
                         break;
                 }
             }

@@ -1,4 +1,5 @@
-﻿using MiniGames.WolfAndEggs.Services;
+﻿using System.Collections.Generic;
+using MiniGames.WolfAndEggs.Services;
 using UnityEngine;
 
 namespace MiniGames.WolfAndEggs
@@ -7,73 +8,87 @@ namespace MiniGames.WolfAndEggs
     {
         private GameController _gameController;
 
-        [HideInInspector] public EggStatus Status;
-        private SpawnEggs _spawnEggs;
+        private int _numberSplinePoint;
+        private List<SplinePoint> _splinePoints;
         private Vector3 _endPosition;
-        private byte _numTrajectories;
-        
+        [SerializeField] private List<Animation> _animations;
+
+        public EggStatus Status;
+
         public Animator Animator;
 
-        public void Initialize(GameController gameController, SpawnEggs spawnEggs)
+        public void Initialize(GameController gameController, List<SplinePoint> splinePoints)
         {
             _gameController = gameController;
-            _spawnEggs = spawnEggs;
-            
-            _numTrajectories = 0;
-            Status = EggStatus.RollingDown;
-            UpdateEndPosition(_spawnEggs.Vector3[_numTrajectories]);
+            _splinePoints = splinePoints;
+            _numberSplinePoint = -1;
+            NextSplinePoint();
         }
 
-        public void RollingDown(float speed)
+        public void Move(float speed)
         {
             transform.position = Vector3.MoveTowards(transform.position, _endPosition, speed);
-
-            if (transform.position != _endPosition) return;
             
-            if (++_numTrajectories == _spawnEggs.Vector3.Count)
+            switch (Status)
             {
-                UpdateEndPosition(new Vector3(0, -0.4f, 0));
-                Status = EggStatus.CanCatch;
+                case EggStatus.RollingDown:
+                    break;
+                case EggStatus.CanCatch:
+                    CanCatch();
+                    break;
+                case EggStatus.Fall:
+                    Fall();
+                    break;
             }
-            else
-                UpdateEndPosition(_spawnEggs.Vector3[_numTrajectories]);
+            
+            if (transform.position != _endPosition) return;
+            NextSplinePoint();
         }
 
-        public void CanCatch(float speed)
+        private void CanCatch()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _endPosition, speed);
-            
-            if (_gameController.Basket.Status == _spawnEggs.BasketStatus)
+            if (_gameController.Basket.Status == _splinePoints[_numberSplinePoint].BasketStatus)
                 Catch();
-            
-            if (transform.position == _endPosition)
-                Status = EggStatus.Fall;
         }
 
-        public void Fall(float speed)
+        private void Fall()
         {
-            var endPosition = new Vector3(transform.position.x, -1.38f, 0);
-            transform.position = Vector3.MoveTowards(transform.position, endPosition, speed);
-                
-            if (transform.position == endPosition)
-                Break();
+            if (transform.position == _endPosition) _gameController.Lives.LostLive();
         }
-        
+
         private void Catch()
         {
             _gameController.Points.Add(10);
             Status = EggStatus.Destroy;
         }
 
-        private void Break()
+        private void NextSplinePoint()
         {
-            _gameController.Lives.LostLive();
-            Status = EggStatus.Destroy;
-        }
-        
-        private void UpdateEndPosition(Vector3 toVector3)
-        {
-            _endPosition = new Vector3(transform.position.x + toVector3.x, transform.position.y + toVector3.y, 0);
+            ++_numberSplinePoint;
+            Status = _splinePoints[_numberSplinePoint].EggStatus;
+            if (Status == EggStatus.Destroy) return;
+            _endPosition = _splinePoints[_numberSplinePoint + 1].Vector3;
+            switch (Status)
+            {
+                case EggStatus.RollingDown:
+                    if (_endPosition.x < transform.position.x)
+                    {
+                        Animator.SetInteger("Int", 0);
+                    }
+                    else if (_endPosition.x > transform.position.x)
+                    {
+                        Animator.SetInteger("Int", 1);
+                    }
+                    else 
+                        Animator.SetInteger("Int", 2);
+                    break;
+                case EggStatus.CanCatch:
+                    Animator.SetInteger("Int", 2);
+                    break;
+                case EggStatus.Fall:
+                    Animator.SetInteger("Int", -1);
+                    break;
+            }
         }
     }
 }

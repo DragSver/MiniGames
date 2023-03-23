@@ -8,6 +8,7 @@ namespace MiniGames.WolfAndEggs
         LeftTop,
         LeftBottom,
         RightTop,
-        RightBottom
+        RightBottom,
+        NotCatch
     }
 }

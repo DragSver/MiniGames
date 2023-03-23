@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,9 @@ namespace MiniGames.WolfAndEggs.Services
         
         [Header("Очки")]
         [SerializeField] private TextMeshProUGUI _pointText;
+        
+        [Header("Кнопки")]
+        [SerializeField] private List<Button> _buttons;
         
         public void PointsUpdate(int point)
         {
@@ -27,6 +31,12 @@ namespace MiniGames.WolfAndEggs.Services
         public void LoseLife(int livesLeft)
         {
             _lives[livesLeft].enabled = false;
+        }
+
+        public void SwitchPauseButton()
+        {
+            foreach (var button in _buttons)
+                button.enabled = !button.enabled;
         }
     }
 }
