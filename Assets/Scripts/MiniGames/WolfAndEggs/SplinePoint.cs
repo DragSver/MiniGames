@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace MiniGames.WolfAndEggs
 {
     public class SplinePoint : MonoBehaviour
     {
-        public EggStatus EggStatus;
+        [FormerlySerializedAs("EggStatus")] public MoveStatus moveStatus;
         public BasketStatus BasketStatus;
         public Vector3 Vector3;
 

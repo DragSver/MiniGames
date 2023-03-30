@@ -665,8 +665,7 @@ GameObject:
   - component: {fileID: 318507009}
   - component: {fileID: 318507008}
   - component: {fileID: 318507007}
-  - component: {fileID: 318507010}
-  - component: {fileID: 318507011}
+  - component: {fileID: 318507012}
   m_Layer: 0
   m_Name: Controllers
   m_TagString: Untagged
@@ -710,10 +709,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPause: 0
   UIController: {fileID: 318507007}
-  MoveEggsController: {fileID: 0}
-  SpawnEggsController: {fileID: 0}
-  Basket: {fileID: 0}
-  _startBasketPosition: {fileID: 1039676523}
+  StartBasketPosition: {fileID: 1039676523}
+  ListSplinePoints:
+  - {fileID: 3277452774952383879}
+  - {fileID: 789714118}
+  - {fileID: 940600976}
+  - {fileID: 571485008}
+  RuntimeScriptableObject: {fileID: 11400000, guid: f2fcb574f37e10444b7ab7a03e61afd3, type: 2}
 --- !u!4 &318507009
 Transform:
   m_ObjectHideFlags: 0
@@ -732,7 +734,7 @@ Transform:
   m_Father: {fileID: 1525809501}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &318507010
+--- !u!114 &318507012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -741,28 +743,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 318507006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21323ed66bef25b44940132afd56d74f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3879e8e86e76bbb42b6b0628bcb69e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listSplinePoints:
-  - {fileID: 3277452774952383879}
-  - {fileID: 789714118}
-  - {fileID: 940600976}
-  - {fileID: 571485008}
---- !u!114 &318507011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318507006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9921252d7d0842049b3913d5122774b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Eggs: []
-  Speed: 0
 --- !u!1 &410270587
 GameObject:
   m_ObjectHideFlags: 0
@@ -3010,6 +2993,10 @@ PrefabInstance:
       propertyPath: BasketStatus
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5636302627722816383, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
+      propertyPath: moveStatus
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8345732596469799717, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3052,6 +3039,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8345732596469799717, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8987754825106496094, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}
+      propertyPath: moveStatus
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9035179662133187411, guid: b71e29a85e9ea0e44a752c10ed4276a1, type: 3}

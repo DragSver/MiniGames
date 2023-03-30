@@ -11,9 +11,7 @@ namespace MiniGames.WolfAndEggs.UI
 
         public void BasketMove()
         {
-            _gameController.Basket.Status = _basketStatus;
-            _gameController.Basket.BasketMove(_basketPosition.transform.position);
+            _gameController.SendBasketData(_basketPosition.transform.position, _basketStatus);
         }
-        
     }
 }
