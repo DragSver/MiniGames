@@ -27,7 +27,7 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
                 ref var catchData = ref _world.GetComponentFrom<CanCatchData>(entityEgg);
                 ref var basketData = ref _world.GetComponentFrom<BasketData>(entityBasket);
 
-                if (catchData.BasketStatus == basketData.BasketStatus)
+                if (catchData.BasketStatus == basketData.Status)
                     _world.AddComponentTo<IsCatch>(entityEgg);
             }
         }

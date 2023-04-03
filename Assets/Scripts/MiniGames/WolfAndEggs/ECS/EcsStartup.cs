@@ -24,8 +24,15 @@ namespace MiniGames.WolfAndEggs.ECS {
                 // register your systems here, for example:
                 // .Add (new TestSystem1 ())
                 // .Add (new TestSystem2 ())
+                .Add(new InitLivesSystem())
+                .Add(new InitPointsSystem())
+                
                 .Add(new InitRuntimeData(_gameController))
                 .Add(new UpdateRuntimeDataSystem(_gameController))
+                
+                .Add(new InitPauseSystem())
+                .Add(new SwitchPauseSystem(_gameController.UIController))
+                .Add(new PauseDataInputSystem(_gameController))
                 
                 .Add(new InitBasketSystem(_gameController))
                 .Add(new InitEggsSystem(_gameController))
@@ -34,15 +41,15 @@ namespace MiniGames.WolfAndEggs.ECS {
                 .Add(new MoveBasketSystem(_gameController))
                 .Add(new SwitchBasketStatusSystem())
                 
-                .Add(new MoveSystem(_gameController))
+                .Add(new MoveSystem())
                 // .Add(new MoveViewSystem())
                 .Add(new NextSplinePointSystem())
                 .Add(new MoveAnimationSystem(_gameController))
                 
                 .Add(new CatchSystem())
                 
-                .Add(new AddPointSystem(_gameController))
-                .Add(new LostLiveSystem(_gameController))
+                .Add(new AddPointSystem(_gameController.UIController))
+                .Add(new LoseLiveSystem(_gameController.UIController))
                 .Add(new DestroySystem())
 
                 // register additional worlds here, for example:

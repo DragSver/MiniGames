@@ -9,6 +9,7 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
     {
         private EcsWorld _world;
         private EcsFilter _filter;
+        private EcsFilter _filterPause;
         private GameController _gameController;
 
         public MoveAnimationSystem(GameController gameController)
@@ -21,23 +22,26 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
             _world = systems.GetWorld();
             // _filter = _world.Filter<NeedSwitchEggAnimation>().End();
             _filter = _world.Filter<MoveData>().Inc<ViewData>().End();
+            _filterPause = _world.Filter<PauseData>().End();
         }
 
         public void Run(EcsSystems systems)
         {
-            if (_filter.IsEmpty()) return;
+            if (_filter.IsEmpty()|| _filterPause.IsEmpty()) return;
 
+            foreach (var pauseEntity in _filterPause)
             foreach (var entity in _filter)
             {
                 ref var moveData = ref _world.GetComponentFrom<MoveData>(entity);
                 ref var viewData = ref _world.GetComponentFrom<ViewData>(entity);
+                ref var pauseData = ref _world.GetComponentFrom<PauseData>(pauseEntity);
 
-                if (_gameController.IsPause && viewData.Animator.enabled)
+                if (pauseData.IsPause && viewData.Animator.enabled)
                 {
                     viewData.Animator.enabled = false;
                     return;
                 }
-                if (!_gameController.IsPause && !viewData.Animator.enabled) viewData.Animator.enabled = true;
+                if (!pauseData.IsPause && !viewData.Animator.enabled) viewData.Animator.enabled = true;
 
                 if (moveData.EndPosition.x < moveData.Position.position.x)
                     viewData.Animator.SetInteger("Int", 0);

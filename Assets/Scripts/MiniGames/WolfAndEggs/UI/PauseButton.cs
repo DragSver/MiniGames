@@ -9,7 +9,7 @@ namespace MiniGames.WolfAndEggs.UI
 
         public void Pause()
         {
-            _gameController.SwitchPause();
+            _gameController.SendPauseData();
         }
     }
 }

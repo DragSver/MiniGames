@@ -1,6 +1,5 @@
 ﻿using Leopotam.EcsLite;
 using MiniGames.WolfAndEggs.ECS.Components;
-using MiniGames.WolfAndEggs.Services;
 
 namespace MiniGames.WolfAndEggs.ECS.Systems
 {
@@ -30,7 +29,7 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
                 ref var inputData = ref _world.GetComponentFrom<InputBasketData>(entityInput);
                 ref var inputBasket = ref _world.GetComponentFrom<BasketData>(entityBasket);
 
-                inputBasket.BasketStatus = inputData.Status;
+                inputBasket.Status = inputData.Status;
                 
                 _world.DelEntity(entityInput);
             }

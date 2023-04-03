@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using Leopotam.EcsLite;
 using MiniGames.WolfAndEggs.ECS.Components;
-using MiniGames.WolfAndEggs.ECS.ScriptableObject;
 using MiniGames.WolfAndEggs.Services;
 
 namespace MiniGames.WolfAndEggs.ECS.Systems

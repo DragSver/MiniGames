@@ -31,14 +31,14 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
 
                 if (numberSplinePoints + 1 >= splinePoints.Count)
                 {
-                    _world.AddComponentTo<IsDestroy>(entity);
+                    _world.AddComponentTo<IsLoseLive>(entity);
                     return;
                 }
                 
-                if ((_world.HasComponentAt<CanCatchData>(entity) && splinePoints[numberSplinePoints].moveStatus==MoveStatus.RollingDown)
-                    ||(!_world.HasComponentAt<CanCatchData>(entity) && splinePoints[numberSplinePoints].moveStatus==MoveStatus.CanCatch))
+                if ((_world.HasComponentAt<CanCatchData>(entity) && splinePoints[numberSplinePoints].BasketStatus==BasketStatus.NotCatch)
+                    ||(!_world.HasComponentAt<CanCatchData>(entity) && splinePoints[numberSplinePoints].BasketStatus!=BasketStatus.NotCatch))
                 {
-                    if (splinePoints[numberSplinePoints].moveStatus == MoveStatus.CanCatch)
+                    if (splinePoints[numberSplinePoints].BasketStatus != BasketStatus.NotCatch)
                     {
                         ref var catchData = ref _world.AddComponentToAndGet<CanCatchData>(entity);
                         catchData.BasketStatus = splinePoints[numberSplinePoints].BasketStatus;

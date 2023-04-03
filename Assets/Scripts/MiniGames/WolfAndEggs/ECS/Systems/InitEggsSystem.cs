@@ -1,7 +1,6 @@
 ﻿using Leopotam.EcsLite;
 using MiniGames.WolfAndEggs.ECS.Components;
 using MiniGames.WolfAndEggs.ECS.Components.Flags;
-using MiniGames.WolfAndEggs.ECS.ScriptableObject;
 using MiniGames.WolfAndEggs.Services;
 using UnityEngine;
 
@@ -15,6 +14,7 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
         
         private EcsWorld _world;
         private EcsFilter _filterRuntime;
+        private EcsFilter _filterPause;
         
         private float _nextSpawnTime;
 
@@ -31,11 +31,23 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
         {
             _world = systems.GetWorld();
             _filterRuntime = _world.Filter<RuntimeData>().End();
+            _filterPause = _world.Filter<PauseData>().End();
         }
         
         public void Run(EcsSystems systems)
         {
-            if (_gameController.IsPause) return;
+            if (_filterPause.IsEmpty()) return;
+
+            foreach (var pauseEntity in _filterPause)
+            {
+                ref var pauseData = ref _world.GetComponentFrom<PauseData>(pauseEntity);
+                if (pauseData.IsPause)
+                {
+                    Time.timeScale = 0;
+                    return;
+                }
+                Time.timeScale = 1;
+            }
 
             if (!(Time.time > _nextSpawnTime)) return;
             

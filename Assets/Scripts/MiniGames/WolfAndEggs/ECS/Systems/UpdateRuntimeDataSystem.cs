@@ -10,6 +10,7 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
         private readonly GameController _gameController;
         private EcsWorld _world;
         private EcsFilter _filter;
+        private EcsFilter _filterPoints;
         
         public UpdateRuntimeDataSystem(GameController gameController)
         {
@@ -20,17 +21,20 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
         {
             _world = systems.GetWorld();
             _filter = _world.Filter<RuntimeData>().End();
+            _filterPoints = _world.Filter<PointsData>().End();
         }
         
         public void Run(EcsSystems systems)
         {
-            if (_filter.IsEmpty()) return;
+            if (_filter.IsEmpty() || _filterPoints.IsEmpty()) return;
 
+            foreach (var entityPoints in _filterPoints)
             foreach (var entity in _filter)
             {
+                ref var pointsData = ref _world.GetComponentFrom<PointsData>(entityPoints);
                 ref var runtimeData = ref _world.GetComponentFrom<RuntimeData>(entity);
 
-                var point = _gameController.Points.Point/1000;
+                var point = pointsData.Count/100;
                 
                 runtimeData.SpeedMove = (point + _gameController.RuntimeScriptableObject.SpeedMove) * Time.deltaTime;
                 
