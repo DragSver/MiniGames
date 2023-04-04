@@ -1,11 +1,12 @@
 ﻿using MiniGames.WolfAndEggs.Services;
 using UnityEngine;
+using Zenject;
 
 namespace MiniGames.WolfAndEggs.UI
 {
     public class MoveButton : MonoBehaviour
     {
-        [SerializeField] private GameController _gameController;
+        [Inject] private GameController _gameController;
         [SerializeField] private BasketStatus _basketStatus;
         [SerializeField] private GameObject _basketPosition;
 

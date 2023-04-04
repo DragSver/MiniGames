@@ -1,17 +1,17 @@
 ﻿using Leopotam.EcsLite;
 using MiniGames.WolfAndEggs.ECS.Components;
-using MiniGames.WolfAndEggs.Services;
+using MiniGames.WolfAndEggs.ScriptableObject;
 
 namespace MiniGames.WolfAndEggs.ECS.Systems
 {
     public class InitRuntimeData : IEcsInitSystem
     {
         private EcsWorld _world;
-        private readonly GameController _gameController;
+        private readonly RuntimeScriptableObject _runtimeScriptableObject;
 
-        public InitRuntimeData(GameController gameController)
+        public InitRuntimeData(RuntimeScriptableObject runtimeScriptableObject)
         {
-            _gameController = gameController;
+            _runtimeScriptableObject = runtimeScriptableObject;
         }
         
         public void Init(EcsSystems systems)
@@ -22,8 +22,8 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
 
             ref var runtimeData = ref _world.AddComponentToAndGet<RuntimeData>(entity);
 
-            runtimeData.SpeedMove = _gameController.RuntimeScriptableObject.SpeedMove;
-            runtimeData.SpawnInterval = _gameController.RuntimeScriptableObject.SpawnInterval;
+            runtimeData.SpeedMove = _runtimeScriptableObject.SpeedMove;
+            runtimeData.SpawnInterval = _runtimeScriptableObject.SpawnInterval;
         }
     }
 }

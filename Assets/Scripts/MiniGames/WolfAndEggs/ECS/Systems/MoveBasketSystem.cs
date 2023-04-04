@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using Leopotam.EcsLite;
 using MiniGames.WolfAndEggs.ECS.Components;
-using MiniGames.WolfAndEggs.Services;
+using MiniGames.WolfAndEggs.ScriptableObject;
 
 namespace MiniGames.WolfAndEggs.ECS.Systems
 {
@@ -12,11 +12,11 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
         private EcsWorld _world;
         private EcsFilter _filterInput;
         private EcsFilter _filterBasket;
-        private readonly GameController _gameController;
+        private readonly RuntimeScriptableObject _runtimeScriptableObject;
 
-        public MoveBasketSystem(GameController gameController)
+        public MoveBasketSystem(RuntimeScriptableObject runtimeScriptableObject)
         {
-            _gameController = gameController;
+            _runtimeScriptableObject = runtimeScriptableObject;
         }
 
         public void Init(EcsSystems systems)
@@ -37,7 +37,7 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
                 var inputData = _world.GetComponentFrom<InputBasketData>(entityInput);
                 var inputBasket = _world.GetComponentFrom<BasketData>(entityBasket);
 
-                inputBasket.GameObject.transform.DOMove(inputData.Position, _gameController.RuntimeScriptableObject.SpeedBasket);
+                inputBasket.GameObject.transform.DOMove(inputData.Position, _runtimeScriptableObject.SpeedBasket);
             }
         }
     }

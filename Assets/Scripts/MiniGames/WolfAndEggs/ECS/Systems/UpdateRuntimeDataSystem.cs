@@ -1,20 +1,20 @@
 ﻿using Leopotam.EcsLite;
 using MiniGames.WolfAndEggs.ECS.Components;
-using MiniGames.WolfAndEggs.Services;
+using MiniGames.WolfAndEggs.ScriptableObject;
 using UnityEngine;
 
 namespace MiniGames.WolfAndEggs.ECS.Systems
 {
     public class UpdateRuntimeDataSystem : IEcsRunSystem, IEcsInitSystem
     {
-        private readonly GameController _gameController;
+        private readonly RuntimeScriptableObject _runtimeScriptableObject;
         private EcsWorld _world;
         private EcsFilter _filter;
         private EcsFilter _filterPoints;
         
-        public UpdateRuntimeDataSystem(GameController gameController)
+        public UpdateRuntimeDataSystem(RuntimeScriptableObject runtimeScriptableObject)
         {
-            _gameController = gameController;
+            _runtimeScriptableObject = runtimeScriptableObject;
         }
         
         public void Init(EcsSystems systems)
@@ -36,9 +36,9 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
 
                 var point = pointsData.Count/100;
                 
-                runtimeData.SpeedMove = (point + _gameController.RuntimeScriptableObject.SpeedMove) * Time.deltaTime;
+                runtimeData.SpeedMove = (point + _runtimeScriptableObject.SpeedMove) * Time.deltaTime;
                 
-                var spawnInterval = _gameController.RuntimeScriptableObject.SpawnInterval;
+                var spawnInterval = _runtimeScriptableObject.SpawnInterval;
                 runtimeData.SpawnInterval = spawnInterval-point > 0.1f ? spawnInterval-point : 0.1f;
             }
         }
