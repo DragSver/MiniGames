@@ -53,6 +53,13 @@ namespace MiniGames.WolfAndEggs.ECS {
                 .Add(new AddPointSystem(_uiController))
                 .Add(new LoseLiveSystem(_uiController))
                 .Add(new DestroySystem())
+                
+                .Add(new NewGameInputSystem(_gameController))
+                .Add(new ResetRuntimeDataSystem(_runtimeScriptableObject))
+                .Add(new ResetLivesDataSystem(_uiController))
+                .Add(new ResetPointsDataSystem(_uiController))
+                .Add(new DestroyAllEggsSystem())
+                .Add(new NewGameSystem(_uiController))
 
                 // register additional worlds here, for example:
                 // .AddWorld (new EcsWorld (), "events")

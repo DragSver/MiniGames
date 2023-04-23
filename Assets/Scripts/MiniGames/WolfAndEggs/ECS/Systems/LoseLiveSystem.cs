@@ -38,8 +38,9 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
                 
                 _world.DelComponentFrom<IsLoseLive>(entityLostLive);
                 _world.AddComponentTo<IsDestroy>(entityLostLive);
-                if (livesData.Count == 0) 
-                    _world.AddComponentTo<InputPause>(_world.NewEntity());
+                if (livesData.Count != 0) continue;
+                _world.AddComponentTo<InputPause>(_world.NewEntity());
+                _uiController.EndGame();
             }
         }
     }

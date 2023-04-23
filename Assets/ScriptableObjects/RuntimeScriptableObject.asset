@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ba29119e2e41008c56b7c80de0f8cb, type: 3}
   m_Name: RuntimeScriptableObject
   m_EditorClassIdentifier: 
-  SpeedBasket: 0.2
-  SpeedMove: 0.5
+  SpeedBasket: 0.1
+  SpeedMove: 1
   SpawnInterval: 3
   StartBasketStatus: 0

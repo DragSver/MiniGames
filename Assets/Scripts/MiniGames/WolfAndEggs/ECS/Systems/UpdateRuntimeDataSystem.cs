@@ -34,12 +34,13 @@ namespace MiniGames.WolfAndEggs.ECS.Systems
                 ref var pointsData = ref _world.GetComponentFrom<PointsData>(entityPoints);
                 ref var runtimeData = ref _world.GetComponentFrom<RuntimeData>(entity);
 
-                var point = pointsData.Count/100;
+                var point = pointsData.Count/100f;
                 
-                runtimeData.SpeedMove = (point + _runtimeScriptableObject.SpeedMove) * Time.deltaTime;
+                runtimeData.SpeedMove = (point + _runtimeScriptableObject.SpeedMove) * Time.deltaTime<=3.5?
+                    (point + _runtimeScriptableObject.SpeedMove) * Time.deltaTime:3.5f;
                 
                 var spawnInterval = _runtimeScriptableObject.SpawnInterval;
-                runtimeData.SpawnInterval = spawnInterval-point > 0.1f ? spawnInterval-point : 0.1f;
+                runtimeData.SpawnInterval = spawnInterval-point > 1f ? spawnInterval-point : 1f;
             }
         }
     }

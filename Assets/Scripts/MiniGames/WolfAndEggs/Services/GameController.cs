@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace MiniGames.WolfAndEggs.Services
 {
@@ -8,10 +9,16 @@ namespace MiniGames.WolfAndEggs.Services
     {
         public Action<Vector3, BasketStatus> SendInputData;
         public Action SendInputPauseData;
+        public Action SendInputNewGameData;
 
         public GameObject StartBasketPosition;
         public List<Spline> ListSplinePoints;
 
+        public void SendNewGameData()
+        {
+            SendInputNewGameData?.Invoke();
+        }
+        
         public void SendPauseData()
         {
             SendInputPauseData?.Invoke();
